@@ -114,6 +114,12 @@ kubectl config use-context developer@development
 Switched to context "developer@development".
 ```
 
+## 总结
+
+1. `kubectl` 命令默认使用 `$HOME/.kube/config` 文件作为 `kubeconfig` 尝试访问 `K8S` 集群，当该文件不存在时，可以直接拷贝 `/etc/kubernetes/admin.conf` 文件并修改其权限为当前用户可访问；
+2. 可以使用 `KUBECONFIG` 环境变量或 `--kubeconfig` 命令参数指定 `kubectl` 命令可以使用的 `kubeconfig`，不同的是环境变量可以指定多个文件（使用 `:` 分隔），而命令参数只能指定一个文件；
+3. `kubeconfig` 可以配置集群、用户、上下文、命名空间和身份认证机制；
+
 ## 参考
 
 1. [使用 kubeconfig 文件组织集群访问](https://kubernetes.io/zh-cn/docs/concepts/configuration/organize-cluster-access-kubeconfig/)
