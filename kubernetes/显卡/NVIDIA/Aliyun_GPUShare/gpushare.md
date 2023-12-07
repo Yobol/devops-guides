@@ -11,7 +11,10 @@ cd /etc/kubernetes
 sudo curl -O https://raw.githubusercontent.com/AliyunContainerService/gpushare-scheduler-extender/master/config/scheduler-policy-config.yaml
 sudo vim scheduler-policy-config.yaml
 # 默认的 apiVersion 可能是 kubescheduler.config.k8s.io/v1beta2，需要修改为如下配置
-# apiVersion: kubescheduler.config.k8s.io/v1
+#   apiVersion: kubescheduler.config.k8s.io/v1
+# 默认的 extenders[0].urlPrefix 是 http://127.0.0.1:32766/gpushare-scheduler，需要修改为如下配置
+#   extenders:
+#   - urlPrefix: http://<NodeIP>:12345/gpushare-scheduler
 
 sudo vim manifests/kube-scheduler.yaml
 # [add container command argument]
@@ -54,7 +57,6 @@ kubectl inspect gpushare -d
 ```
 
 注：`/etc/kubernetes/manifests/kube-scheduler.yaml` 可以参考 [kube-scheduler.yaml](https://github.com/AliyunContainerService/gpushare-scheduler-extender/blob/master/config/kube-scheduler-v1.23+.yaml)。
-
 
 上述步骤完成后，可以通过 [官方示例](https://github.com/AliyunContainerService/gpushare-scheduler-extender/tree/master/samples) 进行测试。
 
