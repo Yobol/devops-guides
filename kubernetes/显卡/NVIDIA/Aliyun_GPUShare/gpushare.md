@@ -60,6 +60,22 @@ kubectl inspect gpushare -d
 
 上述步骤完成后，可以通过 [官方示例](https://github.com/AliyunContainerService/gpushare-scheduler-extender/tree/master/samples) 进行测试。
 
+## 问题
+
+1. `Pod` 报 `no-gpu-has-2MiB-to-run: unknown device: unknown` 的错误：
+
+    该问题可以通过给 `Pod` 添加 `NVIDIA_VISIBLE_DEVICES` 环境变量解决。
+
+    ```yml
+    spec:
+      template:
+        spec:
+          containers:
+          - env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+    ```
+
 ## 参考
 
 1. [gpushare install guide](https://github.com/AliyunContainerService/gpushare-scheduler-extender/blob/master/docs/install.md)
