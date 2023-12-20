@@ -1,0 +1,33 @@
+apiVersion: kubeflow.org/v1
+kind: Profile
+metadata:
+  name: my-team
+spec:
+  owner:
+    kind: User
+    name: yobol1024@gmail.com
+  resourceQuotaSpec: {}
+
+---
+
+# https://github.com/kubeflow/kubeflow/blob/master/components/admission-webhook/README.md
+# https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
+
+apiVersion: "kubeflow.org/v1alpha1"
+kind: PodDefault
+metadata:
+  name: mount-docker-sock
+  namespace: my-team
+spec:
+  selector:
+    matchLabels:
+      mount-docker-sock: "true"
+  desc: "mount host docker.sock"
+  volumeMounts:
+  - name: docker-sock
+    mountPath: /var/run/docker.sock
+  volumes:
+  - name: docker-sock
+    hostPath:
+      path: /var/run/docker.sock
+      type: Socket

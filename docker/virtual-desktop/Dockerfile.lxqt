@@ -1,0 +1,12 @@
+FROM debian:12.0
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt update && \
+    apt install -y \
+        novnc \
+        && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# docker build -f Dockerfile.lxqt -t virtual-desktop:lxqt .
