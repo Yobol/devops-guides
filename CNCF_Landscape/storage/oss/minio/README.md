@@ -1,1 +1,0 @@
-# MinIO Object Storage service
